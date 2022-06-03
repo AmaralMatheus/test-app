@@ -1,0 +1,45 @@
+<div class="absolute w-full h-screen overflow-hidden">    
+    <div class="absolute w-full h-screen transition" [class.transition-loading]="loading">
+        <div class="overflow-hidden w-full h-screen absolute flex height z-10">
+            <img src="assets/loading.gif" class="m-auto" width="100" height="100"/>
+        </div>
+    </div>
+    <div class="absolute w-full h-screen form" [class.loading]="loading">
+        <div class="background overflow-hidden w-full absolute mid-height z-10"></div>
+        <div class="absolute overflow-hidden flex w-full h-screen z-20">
+            <div class="card m-auto">
+                <form [formGroup]="form" (submit)="login()">
+                    <div class="w-full flex">
+                        <img src="assets/logo.svg" class="m-auto" width="120"/>
+                    </div>
+                    <p class="card-text paragraph">Fill the following form and click on the <strong>Login</strong> button to
+                        access the home page</p>
+                    <div>
+                        <div class="form-group">
+                            <label for="email">Email address</label>
+                            <input type="email" id="email" formControlName="email" [class.invalid]="usernameInvalid" class="form-control" />
+                            <div [class.show]="usernameInvalid" class="hidden error-message text-red">Invalid username</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" id="password" formControlName="password" [class.invalid]="passwordInvalid" class="form-control" />
+                            <div [class.show]="passwordInvalid" class="hidden error-message text-red">Invalid password</div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col d-flex flex-row justify-content-center align-content-center">
+                            <button type="submit" class="btn w-full" [disabled]="loading">Login <fa-icon class="ml-2" [class.hidden]="!loading" [icon]="faSpinner"></fa-icon></button>
+                        </div>
+                    </div>
+                    <p class="text-small">Forgot my password</p>
+                </form>
+            </div>
+            <div class="toast flex" (ngClick)="errors = true" [class.toast-show]="errors">
+                Invalid credentials
+                <div (click)="errors = false">
+                    <fa-icon class="ml-2" [icon]="faCancel"></fa-icon>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

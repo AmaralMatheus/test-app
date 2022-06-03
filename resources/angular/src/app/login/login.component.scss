@@ -1,0 +1,92 @@
+.background {
+  background: rgb(53,213,255);
+  background: linear-gradient(90deg, rgba(53,213,255,1) 0%, rgba(0,177,219,1) 100%);
+}
+
+.mid-height {
+  height: 50%;
+}
+
+.card {
+  width: 300px;
+  height: 300px;
+  padding: 25px;
+  background: white;
+  border-radius: 0.8rem;
+  -webkit-box-shadow: 0px 11px 37px 16px rgba(0,0,0,0.14); 
+  box-shadow: 0px 11px 37px 16px rgba(0,0,0,0.14);
+}
+
+.form-group {
+  display: grid;
+}
+
+.hidden {
+  display: none;
+}
+
+.show {
+  display: block !important;
+}
+
+.text-red {
+  color: rgb(255, 53, 53);
+}
+
+.error-message {
+  font-size: 10px;
+  margin-bottom: 10px;
+}
+
+label {
+  font-size: 12px;
+}
+
+.form-control {
+  width: auto !important;
+}
+.form-control:focus {
+  border: solid 1px aqua;
+}
+
+.z-10 {
+  z-index: 10;
+}
+
+.z-20 {
+  z-index: 20;
+}
+
+.paragraph {
+  font-size: small;
+}
+
+.form {
+  transition: 1.45s;
+}
+
+.transition {
+  transition: 1.45s;
+  bottom: -100%;
+}
+
+.transition-loading {
+  transform: translateY(-100%);
+}
+
+.loading {
+  transform: translateY(-100%);
+}
+
+.text-small {
+  font-size: small;
+  width: 100%;
+  text-align: center;
+  cursor: pointer;
+  color: rgb(53,213,255);
+  transition: .45s;
+}
+
+.text-small:hover {
+  color: rgba(0,177,219,1);
+}

@@ -1,0 +1,65 @@
+
+<div class="absolute w-full h-screen flex" *ngIf="loading">
+  <img src="assets/loading.gif" class="m-auto" width="100" height="100"/>
+</div>
+
+<div class="nav flex justify-between">
+  <img src="assets/logo.svg" width="120"/>
+  <button class="ml-auto btn" (click)="logout()">Logout</button>
+</div>
+
+<div class="container" *ngIf="!loading">
+  <div class="flex justify-center ml-2">
+    <h1>Categories</h1>
+    <div class="btn" (click)="createCategory()" style="margin-left: auto; max-width: max-xontent">
+      New Category
+    </div>
+  </div>
+  
+  <div>
+    <ng-container
+      *ngTemplateOutlet="recursiveChild; context:{ categories: categories }"
+    ></ng-container>
+  </div>
+  
+  <ng-template #recursiveChild let-categories="categories">
+    <div class="card" *ngFor="let category of categories">
+      <div class="flex items-center">
+        <div *ngIf="!category.isAbleToSave" class="mr-auto">
+          {{ category.name }}
+        </div>
+        <input *ngIf="category.isAbleToSave" [(ngModel)]="category.name" class="form-control" />
+        <div class="btn-success ml-2 mr-2" *ngIf="category.isAbleToSave" (click)="saveCategory(category)">
+          <fa-icon [icon]="faSave"></fa-icon>
+        </div>
+        <div class="btn-danger mr-2" *ngIf="category.isAbleToSave && category.id" (click)="category.isAbleToSave = false">
+          <fa-icon [icon]="faCancel"></fa-icon>
+        </div>
+        <div class="btn-danger mr-2" *ngIf="category.isAbleToSave && !category.id" (click)="categories.pop()">
+          <fa-icon [icon]="faCancel"></fa-icon>
+        </div>
+        <div class="btn-warning mr-2" *ngIf="!category.isAbleToSave" (click)="category.isAbleToSave = true">
+          <fa-icon [icon]="faPen"></fa-icon>
+        </div>
+        <div class="btn mr-2" *ngIf="!category.isAbleToSave && category.id" (click)="addCategory(category)">
+          <fa-icon [icon]="faPlus"></fa-icon>
+        </div>
+        <div class="btn-danger mr-2" *ngIf="!category.isAbleToSave && category.id" (click)="deleteCategory(category.id)">
+          <fa-icon [icon]="faTrash"></fa-icon>
+        </div>
+      </div>
+      <div *ngIf="category.categories && category.categories.length > 0">
+        <ng-container
+          *ngTemplateOutlet="recursiveChild; context:{ categories: category.categories }"
+        ></ng-container>
+      </div>
+    </div>
+  </ng-template>
+</div>
+<div class="toast flex justify-center" (ngClick)="errors = ''" [class.toast-show]="errors !== ''">
+  {{errors}}
+  <div (click)="clearError()">
+    <fa-icon class="ml-2" [icon]="faCancel"></fa-icon>
+  </div>
+</div>
+
